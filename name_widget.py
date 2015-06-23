@@ -1,9 +1,11 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+from stack_widget import *
+from main_window import *
 
 class NameWidget(QWidget):
+    NameEntered = pyqtSignal()
     def __init__(self):
-        NameEntered = pyqtSignal()
         super().__init__()
         self.username = QLineEdit()
         self.label = QLabel("Please enter your name: ")
@@ -16,12 +18,13 @@ class NameWidget(QWidget):
         self.layout.addWidget(self.submit)
 
         self.setLayout(self.layout)
+
         self.submit.clicked.connect(self.submit_pushed)
+    
 
     def submit_pushed(self):
         name = self.username.text()
         print(name)
         self.NameEntered.emit()
 
-    def NameEntered(self):
-        print("Hi")
+
